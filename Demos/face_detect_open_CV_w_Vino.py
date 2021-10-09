@@ -1,14 +1,18 @@
 import numpy as np
+
+import sys
+sys.path.append('/foo/bar/mock-0.3.1')
+
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
 
 
 # Load the model
 net = cv2.dnn.readNet("./models/intel/face-detection-adas-0001/FP16/face-detection-adas-0001.xml", "./models/intel/face-detection-adas-0001/FP16/face-detection-adas-0001.bin")
 
 # Specify target device
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
+#net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
 
 
 while True:
