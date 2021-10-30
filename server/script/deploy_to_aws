@@ -1,12 +1,6 @@
 
 
 echo 'Starting to Deploy...'
-ssh ubuntu@3.140.222.218 " sudo docker image prune -f 
-        cd PineApple/server/
-        ~/.env
-        docker-compose down
-        git fetch origin
-        git reset --hard origin/master  &&  echo 'You are doing well'
-        docker-compose build && docker-compose up -d
+ssh ubuntu@3.140.222.218 " PineApple/server/script/deploy.sh
         "
 echo 'Deployment completed successfully'
