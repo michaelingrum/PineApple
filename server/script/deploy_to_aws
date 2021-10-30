@@ -3,7 +3,12 @@
 echo 'Starting to Deploy...'
 ssh ubuntu@3.140.222.218 " sudo docker image prune -f 
         cd PineApple/server/
-        export $(cat /home/ubuntu/.env)
+        export MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+        export MYSQL_DATABASE=pineapple
+        export MYSQL_LOCAL_PORT=3306
+        export MYSQL_DOCKER_PORT=3306
+        export NODE_LOCAL_PORT=3000
+        export NODE_DOCKER_PORT=3000
         docker-compose down
         git fetch origin
         git reset --hard origin/master  &&  echo 'You are doing well'
