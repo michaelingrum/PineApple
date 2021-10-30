@@ -3,7 +3,7 @@ services:
   mysqldb:
     image: mysql
     restart: always
-    env_file: .env
+#    env_file: .env
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
