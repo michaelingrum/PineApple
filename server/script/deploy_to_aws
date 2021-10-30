@@ -3,7 +3,7 @@
 echo 'Starting to Deploy...'
 ssh ubuntu@3.140.222.218 " sudo docker image prune -f 
         cd PineApple/server/
-        ~/.env
+        ~/setupenv.sh
         docker-compose down
         git fetch origin
         git reset --hard origin/master  &&  echo 'You are doing well'
