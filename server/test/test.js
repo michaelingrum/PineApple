@@ -1,5 +1,5 @@
 var request = require('supertest');
-var app = require('../index.js');
+var app = require('../app/app.js');
 
 describe('GET /', function() {
     it('respond with Hello World!', function(done) {
@@ -7,3 +7,4 @@ describe('GET /', function() {
      request(app).get('/').expect('Hello World!', done);
     });
    });
+

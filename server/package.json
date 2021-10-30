@@ -2,9 +2,9 @@
   "name": "pineserver",
   "version": "1.0.0",
   "description": "test server for nodejs",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter spec --exit"
   },
   "author": "",
   "license": "ISC",
