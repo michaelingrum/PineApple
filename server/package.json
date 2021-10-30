@@ -4,7 +4,7 @@
   "description": "test server for nodejs",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --reporter spec --exit"
+    "test": "mocha -d ./test/ --reporter spec --exit "
   },
   "author": "",
   "license": "ISC",
