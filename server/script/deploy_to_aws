@@ -1,6 +1,7 @@
 
 
 echo 'Starting to Deploy...'
-ssh ubuntu@3.140.222.218 " sudo PineApple/server/script/deploy.sh
+ssh ubuntu@3.140.222.218 " chmod +x server/script/deploy_to_aws
+server/script/deploy.sh
         "
 echo 'Deployment completed successfully'
