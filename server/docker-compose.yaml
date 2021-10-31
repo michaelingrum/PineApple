@@ -4,7 +4,8 @@ services:
     image: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_APP_USER: $MYSQL_APP_USER
+      MYSQL_APP_PASS: $MYSQL_APP_PASS
       MYSQL_DATABASE: $MYSQL_DATABASE
     ports:
       - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT

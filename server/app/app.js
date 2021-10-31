@@ -1,5 +1,5 @@
 const express = require("express");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const app = express();
 
 app.use(express.json());
@@ -8,8 +8,8 @@ const port = process.env.PORT || 3000;
 
 const pool = mysql.createPool({
   host     : 'database',
-  user     : 'root',
-  password : process.env.MYSQL_ROOT_PASSWORD,
+  user     : 'appuser',
+  password : 'AppPass3000',
   database : process.env.MYSQL_DATABASE,
   port     : '3306'
 });
@@ -20,7 +20,7 @@ app.listen(port, ()=>{
 });
 
 app.get("/", async (req, res) => {
-  res.json({status: "lets to it 🍍😎🍍"});
+  res.json({status: "lets to it 🍍😎"});
   console.log("Passwoed" + process.env.MYSQL_ROOT_PASSWORD);
 });
 
