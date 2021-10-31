@@ -1,4 +1,4 @@
-sudo docker image prune -f 
+sudo docker image prune -f
 cd ~/PineApple/server/
 docker-compose down
 git fetch origin
