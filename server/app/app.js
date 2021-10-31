@@ -8,8 +8,8 @@ const port = process.env.PORT || 3000;
 
 const pool = mysql.createPool({
   host     : 'database',
-  user     : 'appuser',
-  password : 'AppPass3000',
+  user     : process.env.MYSQL_APP_USER,
+  password : process.env.MYSQL_APP_PASS,
   database : process.env.MYSQL_DATABASE,
   port     : '3306'
 });
@@ -21,7 +21,6 @@ app.listen(port, ()=>{
 
 app.get("/", async (req, res) => {
   res.json({status: "lets to it 🍍😎"});
-  console.log("Passwoed" + process.env.MYSQL_ROOT_PASSWORD);
 });
 
 
@@ -33,6 +32,7 @@ app.get("/:nodeID", async (req, res) =>{
     if(error){
       res.json({status: "DB is fucked! 🍆" + error.code});
       console.log(error);
+      console.log("Passwoed" + process.env.MYSQL_APP_PASS);
     }
     else if (!results[0]){
       res.json({status: "Not Found 😶"});
