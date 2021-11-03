@@ -23,6 +23,22 @@ app.get("/", async (req, res) => {
   res.json({status: "lets to it 🍍😎"});
 });
 
+app.get("/allNodes/", async (req, res) =>{
+  console.log(req.params.nodeID);
+  const query = "SELECT * FROM node";
+  pool.query(query, [req.params.nodeID], (error, results) =>{
+    if(error){
+      res.json({status: "DB is down. 😶" + error.code});
+      console.log(error);
+      console.log("Passwoed" + process.env.MYSQL_APP_PASS);
+    }
+    else if (!results[0]){
+      res.json({status: "Not Found 😶"});
+    }else{
+      res.json(results);
+    }
+  } );
+});
 
 
 app.get("/:nodeID", async (req, res) =>{
