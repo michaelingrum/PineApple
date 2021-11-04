@@ -40,15 +40,28 @@ app.get("/allNodes/", async (req, res) =>{
   } );
 });
 
+app.post("/setData", async (req, res) => {
+  const { id, is_alive, ip } = req.body;
+  let sql = 'CALL touchNode(?,?,?)';
+  pool.query(sql, [id, is_alive, ip], (error, results) =>{
+    if(error){
+      res.json({status: "DB is down" + error.code});
+      console.log(error);
+    }
+    else{
+      res.json({status: "200 OK"});
+    }
+  } );
+});
+
 
 app.get("/:nodeID", async (req, res) =>{
   console.log(req.params.nodeID);
   const query = "SELECT * FROM node as n where n.id = ?";
   pool.query(query, [req.params.nodeID], (error, results) =>{
     if(error){
-      res.json({status: "DB is fucked! 🍆" + error.code});
+      res.json({status: "DB is down" + error.code});
       console.log(error);
-      console.log("Passwoed" + process.env.MYSQL_APP_PASS);
     }
     else if (!results[0]){
       res.json({status: "Not Found 😶"});

@@ -19,7 +19,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    futureNode = getNodeData();
     futureList = getData();
   }
 
@@ -28,14 +27,15 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Fetch Data Example',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Fetch Data Example'),
         ),
         body: Center(
-          child: FutureBuilder<List<Node>>(
+          child:
+          FutureBuilder<List<Node>>(
             future: futureList,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
                   rows: snapshot.data!
                       .map((n) => DataRow(cells: [
                             DataCell(Text(n.id.toString())),
-                             DataCell((n.isAlive==1) ? const Text('Alive😀') : const Text('dead💀')),
+                             DataCell((n.isAlive==1) ? const Text('Alive 😀') : const Text('Dead 💀')),
                               DataCell(Text(n.ip)),
                           ]))
                       .toList(),
@@ -75,8 +75,15 @@ class _MyAppState extends State<MyApp> {
             },
           ),
         ),
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            setState(() {
+              futureList = getData();
+            });
+          },
+          child: const Icon(Icons.refresh),),
+        ),
+      );
   }
 }
 
@@ -105,7 +112,6 @@ class Node {
   Node({Key? key, required this.id, required this.ip, required this.isAlive});
 
   factory Node.fromJson(dynamic json) {
-    print(json['id'].runtimeType);
     return Node(id: json['id'], ip: json['ip'], isAlive: json['is_alive']);
   }
 }
