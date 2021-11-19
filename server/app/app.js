@@ -99,15 +99,11 @@ app.get('/light/phase', async (req, res) =>{
 });
 
 app.get('/light/color', async (req, res) =>{
-  if (!req.query['node_id'] && !req.query['light_id']){
-    res.type('text').status(400).send('Missing Required GET parameters: node_id, light_id');
-  }else if (!req.query['node_id'] && req.query['light_id']){
-      res.type('text').status(400).send('Missing Required GET parameters: node_id');
-  }else if (req.query['node_id'] && !req.query['light_id']){
-      res.type('text').status(400).send('Missing Required GET parameters: light_id');
+  if (!req.query['node_id'] ){
+    res.type('text').status(400).send('Missing Required GET parameters: node_id');
   }else{
-    const query = "SELECT * FROM light as n where n.parent_node = ? and n.id = ?";
-    pool.query(query, [req.query['node_id'], req.query['light_id']], (error, results) =>{
+    const query = "SELECT * FROM light as n where n.parent_node = ?";
+    pool.query(query, [req.query['node_id']], (error, results) =>{
       if(error){
         res.status(500);
         res.json({er_status: "DB is down" + error.code});
@@ -118,7 +114,7 @@ app.get('/light/color', async (req, res) =>{
         res.json({er_status: "Not Found 😶"});
       }else{
         res.status(200);
-        res.json(results[0]);
+        res.json(results);
       }
     } );
   }
