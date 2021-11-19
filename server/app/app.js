@@ -120,6 +120,28 @@ app.get('/light/color', async (req, res) =>{
   }
 });
 
+app.get('/light/all', async (req, res) =>{
+  if (!req.query['node_id'] ){
+    res.type('text').status(400).send('Missing Required GET parameters: node_id');
+  }else{
+    const query = "select * from light, phase where phase.light_id = light.id and light.parent_node = ?";
+    pool.query(query, [req.query['node_id']], (error, results) =>{
+      if(error){
+        res.status(500);
+        res.json({er_status: "DB is down" + error.code});
+        console.log(error);
+      }
+      else if (!results[0]){
+        res.status(400);
+        res.json({er_status: "Not Found 😶"});
+      }else{
+        res.status(200);
+        res.json(results);
+      }
+    } );
+  }
+});
+
 
 app.post("/setLightPhase", async (req, res) => {
   const { node_id, light_id, phase } = req.body;
