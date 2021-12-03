@@ -159,7 +159,7 @@ app.post("/setLightPhase", async (req, res) => {
 
 app.post("/setLightDirection", async (req, res) => {
   const { node_id, light_id, direction } = req.body;
-  let sql = 'CALL setPhase(?,?,?)';
+  let sql = 'CALL setLightDir(?,?,?)';
   pool.query(sql, [light_id, node_id, direction], (error, results) =>{
     if(error){
       res.json({status: "DB is down" + error.code});
