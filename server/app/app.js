@@ -124,7 +124,7 @@ app.get('/light/all', async (req, res) =>{
   if (!req.query['node_id'] ){
     res.type('text').status(400).send('Missing Required GET parameters: node_id');
   }else{
-    const query = "select * from light, phase where phase.light_id = light.id and phase.node_id = light.parent_node and light.parent_node = ?";
+    const query = "select light.*, phase.*, lt.url from light, phase, light_img_lookup as lt where phase.light_id = light.id and phase.node_id = light.parent_node and lt.color = light.color and lt.direction = light.direction and light.parent_node = ?";
     pool.query(query, [req.query['node_id']], (error, results) =>{
       if(error){
         res.status(500);
